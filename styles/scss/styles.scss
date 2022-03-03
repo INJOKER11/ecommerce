@@ -1,0 +1,50 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+//header menu
+
+.header_main  {
+  height: 150px;
+  background: lightgreen;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  .header_wrap_menu{
+
+    .header_menu{
+
+
+      .h_menu{
+
+        padding: 0px 15px;
+        font-size: 25px;
+        text-decoration: none ;
+
+      }
+    }
+  }
+}
+
+
+.main_wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+//product card
+
+.card_form  {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+
+
