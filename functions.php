@@ -42,4 +42,21 @@ function getCartProductById($id, $cart){
 
 }
 
+function getCartSum($connect, $cart){
+
+    $ids_array = getCartProductIds($cart);
+    $ids_string = implode(',', $ids_array);
+
+    $result = mysqli_query($connect, "SELECT id, product_cost FROM `goods` where id IN ($ids_string)") ;
+
+    $sum = 0;
+
+    if($result !== false){
+        while($product = mysqli_fetch_assoc($result)) {
+            $quantity = getCartProductById($product['id'], $cart)['count'];
+            $sum += $product['product_cost'] * $quantity;
+        }
+    }
+    return $sum;
+}
 

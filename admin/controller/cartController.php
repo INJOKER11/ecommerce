@@ -1,60 +1,65 @@
 <?php
 session_start();
 include 'C:\OpenServer\domains\auth\functions.php';
+include 'C:\OpenServer\domains\auth\vendor\connect.php';
 
+if(!isset($_POST['add']) && !isset($_POST['remove'])){
+    return;
+}
 
-    if(!isset($_POST['add']) && !isset($_POST['remove'])){
-        return;
-    }
+$id = $_POST['product_id'];
 
-        $id = $_POST['product_id'];
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = [];
+}
 
-        if(!isset($_SESSION['cart'])){
-             $_SESSION['cart'] = [];
-        }
+if(isset($_POST['add'])){
+    if(!hasIdInCart($id, $_SESSION['cart']))
+    {
+        $_SESSION['cart'][] = [
+            'id' => $id,
+            'count' => 1,
+        ];
+    }else{
 
-    if(isset($_POST['add'])){
-        if(!hasIdInCart($id, $_SESSION['cart']))
-        {
-            $_SESSION['cart'][] = [
-                'id' => $id,
-                'count' => 1,
-            ];
-        }else{
+        $index = getCartProductIndex($id, $_SESSION['cart']);
+        $_SESSION['cart'][$index]['count']++;
 
-            $index = getCartProductIndex($id, $_SESSION['cart']);
-            $_SESSION['cart'][$index]['count']++;
-
-
-        }
-    }
-
-    if(isset($_POST['remove'])) {
-        if(hasIdInCart($id, $_SESSION['cart']))
-        {
-
-
-
-            $index = getCartProductIndex($id, $_SESSION['cart']);
-            $_SESSION['cart'][$index]['count']--;
-
-            if($_SESSION['cart'][$index]['count'] == 0 ){
-                unset($_SESSION['cart'][$index]);
-
-            }
-
-        }
 
     }
-    $cart_product = getCartProductById($id, $_SESSION['cart']);
+}
+
+if(isset($_POST['remove'])) {
+    if(hasIdInCart($id, $_SESSION['cart']))
+    {
 
 
-    $response = [
-        'cart' => $_SESSION['cart'],
-        'count' => $cart_product['count'],
-    ];
 
-    echo json_encode($response);
+        $index = getCartProductIndex($id, $_SESSION['cart']);
+        $_SESSION['cart'][$index]['count']--;
+
+        if($_SESSION['cart'][$index]['count'] == 0 ){
+            unset($_SESSION['cart'][$index]);
+
+        }
+
+    }
+
+}
+$cart_product = getCartProductById($id, $_SESSION['cart']);
+
+$sum = getCartSum($connect, $_SESSION['cart']);
+
+$response = [
+    'cart' => $_SESSION['cart'],
+    'count' => $cart_product['count'],
+    'id' => $id,
+    'sum' => $sum,
+];
+
+echo json_encode($response);
+
+
 
 
 

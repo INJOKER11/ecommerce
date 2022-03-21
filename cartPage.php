@@ -4,9 +4,10 @@ include 'C:\OpenServer\domains\auth\vendor\connect.php';
 include 'C:\OpenServer\domains\auth\functions.php';
 
 
-$string = implode(",",getCartProductIds($_SESSION['cart']));
 
-$cart_products = mysqli_query($connect, "SELECT * FROM `goods` WHERE id IN($string) ");
+$result = mysqli_query($connect, "SELECT * FROM `goods`");
+
+
 
 
 
@@ -27,7 +28,7 @@ $cart_products = mysqli_query($connect, "SELECT * FROM `goods` WHERE id IN($stri
 <header class="header_main">
     <div class="header_wrap_menu">
         <nav class="header_menu">
-            <a href="" class="h_menu">Главная</a>
+            <a href="/" class="h_menu">Главная</a>
             <a href="" class="h_menu">Главная</a>
             <a href="" class="h_menu">Главная</a>
             <a href="" class="h_menu">Главная</a>
@@ -48,34 +49,83 @@ $cart_products = mysqli_query($connect, "SELECT * FROM `goods` WHERE id IN($stri
     <div class="cart">
         <div class="product_in_cart_wrapper">
 
-                <?php while($cart_output = mysqli_fetch_assoc($cart_products))
-                { ?>
-                    <form action="admin/controller/cartController.php" method="POST"  enctype="multipart/form-data" class="product_in_cart">
-                <div class="img_wrapper">
-                    <img src="<?=  $cart_output['product_img'] ?>" alt="" class="img_in_cart">
-                </div>
+            <div class="products_wrapper">
 
-                <div class="name_in_cart_wrapper">
-                    <p class="name_in_cart">
-                        <?=  $cart_output['product_name'] ?>
-                    </p>
-                </div>
+                <?php
 
-                <div class="price_in_cart_wrapper">
-                    <p class="price_in_cart">
-                        <?=  $cart_output['product_cost'] ?>
-                    </p>
-                </div>
-                <input type="button" value="add" class="add" name="add">
-                <input type="button" value="remove" class="remove" name="remove">
+                while($products_in_cart = mysqli_fetch_assoc($result))
+                {
+                if(!hasIdInCart($products_in_cart['id'], $_SESSION['cart'])){
+                    continue;
+                }
+
+                    ?>
+                    <form action="index.php" id="p<?= $products_in_cart['id'] ?>" method="POST"  enctype="multipart/form-data" class="card_form js_form">
+                        <input class="js_id" type="hidden" name="product_id" value="<?= $products_in_cart['id'] ?>">
+
+                        <div class="img_wrapper">
+                            <img src="   <?= $products_in_cart['product_img']?>" alt="" class="card_img">
+                        </div>
 
 
+                        <div class="card_name_wrapper">
+                            <p class="card_name"><?= $products_in_cart['product_name'] ?></p>
+                        </div>
 
-            </form>
-            <?php } ?>
+
+                        <div class="card_description_wrapper">
+                            <p class="card_description">
+                                <?=    $products_in_cart['product_description']    ?>
+                            </p>
+                        </div>
+
+
+                        <div class="card_price_wrapper">
+                            <p class="card_price">
+                                <?=    $products_in_cart['product_cost'] ?>
+                            </p>
+                        </div>
+
+
+                        <div class="cart_btn_wrapper">
+
+                            <input type="submit" value="Добавить в корзину" class="add js_add" name="add">
+                            <input type="submit" style="display:<?= (hasIdInCart($products_in_cart['id'], $_SESSION['cart'])?'block' : 'none') ?>" value="Убрать c корзину" class="remove js_remove" name="remove">
+
+                            <p class="msg js_count">
+
+                                <?php
+
+                                if(hasIdInCart($products_in_cart['id'], $_SESSION['cart'])) {
+                                    $index = getCartProductIndex($products_in_cart['id'], $_SESSION['cart']);
+                                    echo $_SESSION['cart'][$index]['count'];
+
+                                }
+
+                                ?>
+                            </p>
+
+
+
+
+                        </div>
+
+                    </form>
+
+
+                    <?php
+                }
+
+
+                ?>
+
+            </div>
+
         </div>
 
-
+        <p class="msg js_sum">
+            <?=  getCartSum($connect, $_SESSION['cart'])  ?>
+        </p>
 
     </div>
 
@@ -83,9 +133,6 @@ $cart_products = mysqli_query($connect, "SELECT * FROM `goods` WHERE id IN($stri
 </div>
 
 
-
-
-
-
+<script src="js/main.js"></script>
 </body>
 </html>
