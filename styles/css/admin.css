@@ -1,0 +1,16 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.main_wrapper {
+  display: flex;
+}
+.main_wrapper .nav_admin_panel {
+  min-height: 100vh;
+  width: 150px;
+  background-color: aqua;
+}
+
+/*# sourceMappingURL=admin.css.map */

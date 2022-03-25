@@ -84,6 +84,10 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                             <p class="card_price">
                                 <?=    $products_in_cart['product_cost'] ?>
                             </p>
+
+                            <p class="cart_currency">
+                                <?=  $products_in_cart['currency']  ?>
+                            </p>
                         </div>
 
 
@@ -126,6 +130,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
         <p class="msg js_sum">
             <?=  getCartSum($connect, $_SESSION['cart'])  ?>
         </p>
+
 
     </div>
 

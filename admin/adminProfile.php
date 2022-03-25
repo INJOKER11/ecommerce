@@ -2,7 +2,7 @@
 session_start();
 
 ?>
-<doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@ session_start();
 <body>
 
 
-<form action="controller/productController.php" method="post" enctype="multipart/form-data">
+<form action="controller/productController.php" method="post" enctype="multipart/form-data" >
     <label >Фото продукта</label>
     <input type="file" name="product_img">
     <label >Название продукта</label>
@@ -21,6 +21,8 @@ session_start();
     <textarea type="text" name="product_description" placeholder="Введи описание продукта" ></textarea>
     <label >Стоимость продукта</label>
     <input type="text" name="product_price" placeholder="Введи стоимость продукта">
+    <label>Веддите валюту</label>
+    <input  type="text" name="currency" placeholder="Введите валюту">
     <button type="submit">Добавить продукт</button>
 
     <?php

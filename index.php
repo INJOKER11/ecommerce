@@ -77,6 +77,9 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                         <p class="card_price">
                             <?=    $products['product_cost'] ?>
                         </p>
+                        <p class="cart_currency">
+                            <?=  $products['currency']  ?>
+                        </p>
                     </div>
 
 
