@@ -1,13 +1,25 @@
 var checkBox = document.querySelector('.product_check');
-var adminForm = document.querySelector('.admin_form');
+var adminForm = document.querySelector('.admin_form_wrapper');
 adminForm .style.display = 'none';
 
 checkBox.addEventListener('change', () => {
 
     if(checkBox.checked) {
-        adminForm .style.display = 'flex';
+
+        let prod_dir = '/admin/adminProducts.php';
+
+        if(window.location.pathname === prod_dir){
+            adminForm .style.display = 'flex';
+        }else{
+
+            window.location.replace('/admin/adminProducts.php');
+        }
+
+
 
     } else {
-        adminForm .style.display = 'none';
+        window.location.replace('/admin/adminPanel.php');
+        adminForm.style.display = 'none';
     }
 });
+

@@ -6,10 +6,10 @@
 
 .main_wrapper{
   display: flex;
-
+  width: 1920px;
 
   .nav_admin_panel {
-    min-height: 100vh;
+    height: 100vh;
     width: 150px;
     background-color: aqua;
 
@@ -25,7 +25,17 @@
     }
   }
   .admin_form_wrapper {
+    width: 1770px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    .admin_form {
+      width: 300px;
+
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
