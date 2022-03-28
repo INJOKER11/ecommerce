@@ -35,34 +35,42 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
         </div>
     </div>
 
-    <!--
-        <div class="admin_form_wrapper">
-            <button type="submit" class="admin_add_product">
-                Добавить продукт
-            </button>
-
-            <form action="controller/productController.php" method="post" enctype="multipart/form-data"  class="admin_form" >
-                <label >Фото продукта</label>
-                <input type="file" name="product_img">
-                <label >Название продукта</label>
-                <input type="text" name="product_name" placeholder="Введи название продукта">
-                <label >Описание продукта</label>
-                <textarea type="text" name="product_description" placeholder="Введи описание продукта" ></textarea>
-                <label >Стоимость продукта</label>
-                <input type="number" name="product_price" placeholder="Введи стоимость продукта">
-                <label>Веддите валюту</label>
-                <input  type="text" name="currency" placeholder="Введите валюту">
-                <button type="submit">Добавить продукт</button>
-            </form>
-
-        </div>
-    -->
 
 
 
     <div class="product_in_admin_wrapper">
 
+        <div class="admin_product_form_wrapper">
+            <button  class="admin_add_product">
+                Добавить продукт
+            </button>
 
+
+
+
+            <div class="modal_window_wrapper" style="visibility: hidden; opacity: 0;">
+                <div class="modal_window">
+                    <button onclick="close()" class="close_modal"></button>
+                    <form action="controller/productController.php" method="post" enctype="multipart/form-data" class="admin_form" >
+                        <label >Фото продукта</label>
+                        <input type="file" name="product_img">
+                        <label >Название продукта</label>
+                        <input type="text" name="product_name" placeholder="Введи название продукта">
+                        <label >Описание продукта</label>
+                        <textarea type="text" name="product_description" placeholder="Введи описание продукта" ></textarea>
+                        <label >Стоимость продукта</label>
+                        <input type="number" name="product_price" placeholder="Введи стоимость продукта">
+                        <label>Веддите валюту</label>
+                        <input  type="text" name="currency" placeholder="Введите валюту">
+                        <button type="submit">Добавить продукт</button>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+        </div>
 
     <table>
 
@@ -97,10 +105,12 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
 
 
+<script src="../js/admin.js"></script>
+
 </body>
 
 
-<script src="../js/admin.js"></script>
+
 
 
 
