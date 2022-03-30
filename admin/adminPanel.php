@@ -51,7 +51,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
             <div class="modal_window_wrapper" style="visibility: hidden; opacity: 0;">
                 <div class="modal_window">
                     <button onclick="close()" class="close_modal"></button>
-                    <form action="controller/productController.php" method="post" enctype="multipart/form-data" class="admin_form" >
+                    <form action="controller/productController.php" method="post" enctype="multipart/form-data" class="admin_form js_admin_form" >
                         <label >Фото продукта</label>
                         <input type="file" name="product_img">
                         <label >Название продукта</label>
@@ -62,7 +62,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                         <input type="number" name="product_price" placeholder="Введи стоимость продукта">
                         <label>Веддите валюту</label>
                         <input  type="text" name="currency" placeholder="Введите валюту">
-                        <button type="submit">Добавить продукт</button>
+                        <button type="submit" class="js_add_product">Добавить продукт</button>
                     </form>
 
                 </div>
@@ -72,7 +72,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
         </div>
 
-    <table>
+    <table class="table_products">
 
         <tr>
             <th>id</th>

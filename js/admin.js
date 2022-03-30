@@ -51,8 +51,7 @@ closeBtn.addEventListener('click', function (){
 
     modalWrapper.addEventListener('click', (e) => {
         let target = e.target;
-
-        if(target.contains(modalWindow) && target === modalWindow){
+        if(target !== modalWrapper){
             return false;
         } close();
 
@@ -61,7 +60,24 @@ closeBtn.addEventListener('click', function (){
 
     })
 
+let formAdd = document.querySelectorAll('.js_admin_form');
 
+formAdd.forEach(form =>{
+    let addProduct = form.querySelector('js_add_product')
+    form.addEventListener("submit",function (ev){
+        ev.preventDefault();
+    });
+    addProduct.addEventListener("click", function (ev){
+        updateAdminProducts(form, 'add',addProduct);
+    })
+})
+
+function updateAdminProducts(form, type='add', addProduct){
+    let id = form.querySelector('.js_id');
+    let img = form.querySelector('.js_img');
+
+
+}
 
 
 

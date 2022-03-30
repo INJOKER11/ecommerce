@@ -19,7 +19,7 @@
 
         ];
 
-        header('Location: ../adminProfile.php');
+        header('Location: ../adminPanel.php');
 
     }else {
         $_SESSION['message'] = 'ТЫ НЕ АДМИН ПИДРИЛА ЕБАННАЯ';

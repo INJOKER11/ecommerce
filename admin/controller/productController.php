@@ -14,11 +14,12 @@
     if(move_uploaded_file($_FILES['product_img']['tmp_name'], '../../' . $path_img)){
 
         $_SESSION['message'] = 'Ошибка в загрузке фото';
-        header('Location: ../adminProfile.php');
+        header('Location: ../adminPanel.php');
     }else {
         $_SESSION['message'] = 'Успешно загрузили';
-        header('Location: ../adminProfile.php');
+        header('Location: ../adminPanel.php');
     }
 
 mysqli_query($connect, "INSERT INTO `goods` (`id`, `product_img`, `product_name`, `product_description`, `product_cost`, `currency` )
                               VALUES (NULL, '$path_img', '$product_name', '$product_description', '$product_price', '$currency')");
+

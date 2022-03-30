@@ -21,8 +21,7 @@
 .main_wrapper .admin_product_form_wrapper {
   width: 1770px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 15px;
 }
 .main_wrapper .admin_product_form_wrapper .admin_form {
   width: 300px;
@@ -57,9 +56,9 @@
 }
 
 .modal_window {
-  top: 10%;
-  left: 0;
-  right: 0;
+  top: 200px;
+  left: 300px;
+  right: 300px;
   width: 80%;
   min-width: 200px;
   max-width: 600px;
@@ -80,6 +79,16 @@
   color: rgba(255, 255, 255, 0.9);
   content: "X";
   text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+}
+
+.table_products {
+  border: 1px solid #666666;
+}
+.table_products tr {
+  border: 1px solid #666666;
+}
+.table_products td {
+  border: 1px solid #666666;
 }
 
 /*# sourceMappingURL=admin.css.map */

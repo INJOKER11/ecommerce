@@ -57,7 +57,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                     <input class="js_id" type="hidden" name="product_id" value="<?= $products['id'] ?>">
 
                     <div class="img_wrapper">
-                        <img src="<?= $products['product_img']?>" alt="" class="card_img">
+                        <img src="<?= $products['product_img']?>" alt="" height="200px" class="card_img">
                     </div>
 
 
