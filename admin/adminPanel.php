@@ -51,9 +51,12 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
             <div class="modal_window_wrapper" style="visibility: hidden; opacity: 0;">
                 <div class="modal_window">
                     <button onclick="close()" class="close_modal"></button>
-                    <form action="controller/productController.php" method="post" enctype="multipart/form-data" class="admin_form js_admin_form" >
-                        <label >Фото продукта</label>
-                        <input type="file" name="product_img">
+                    <form   method="POST" action="controller/productController.php" enctype="multipart/form-data" class="admin_form" >
+                        <label >Фото продукта
+                            <img src="" alt="" height="100px" class="js-preview">
+                            <img src="" alt="" height="100px" class="js-preview">
+                        </label>
+                        <input type="file" class="product_img" name="product_img">
                         <label >Название продукта</label>
                         <input type="text" name="product_name" placeholder="Введи название продукта">
                         <label >Описание продукта</label>
@@ -62,9 +65,9 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                         <input type="number" name="product_price" placeholder="Введи стоимость продукта">
                         <label>Веддите валюту</label>
                         <input  type="text" name="currency" placeholder="Введите валюту">
-                        <button type="submit" class="js_add_product">Добавить продукт</button>
+                        <button type="submit"  class="admin_add">Добавить продукт</button>
                     </form>
-
+                <p class="msg"><?= $_SESSION['message']    ?></p>
                 </div>
             </div>
 
@@ -72,7 +75,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
         </div>
 
-    <table class="table_products">
+    <table id="table_products" class="table_products">
 
         <tr>
             <th>id</th>
@@ -85,14 +88,14 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
         </tr>
         <?php  foreach($result as $admin_products){     ?>
         <tr>
-            <td><?=  $admin_products['id']  ?></td>
-            <td>
+            <td class="js_id"><?=  $admin_products['id']  ?></td>
+            <td class="js_img">
                 <img src="../<?=  $admin_products['product_img']  ?>" alt="" style="height: 100px" class="img_in_admin">
             </td>
-            <td><?=  $admin_products['product_name']  ?></td>
-            <td><?=  $admin_products['product_description']  ?></td>
-            <td><?=  $admin_products['product_cost']  ?></td>
-            <td><?=  $admin_products['currency']  ?></td>
+            <td class="js_name"><?=  $admin_products['product_name']  ?></td>
+            <td class="js_description"><?=  $admin_products['product_description']  ?></td>
+            <td class="js_price"><?=  $admin_products['product_cost']  ?></td>
+            <td class="js_currency"><?=  $admin_products['currency']  ?></td>
             <td><a href="" class="">Редактировать</a></td>
 
         </tr>
@@ -104,8 +107,11 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 </div>
 
 
+<script src="../assets/jquery/jquery-3.6.0.min.js"></script>
+<script src="../js/admin.js">
 
-<script src="../js/admin.js"></script>
+</script>
+
 
 </body>
 

@@ -49,35 +49,53 @@ closeBtn.addEventListener('click', function (){
 
 
 
-    modalWrapper.addEventListener('click', (e) => {
-        let target = e.target;
-        if(target !== modalWrapper){
-            return false;
-        } close();
+modalWrapper.addEventListener('click', (e) => {
+    let target = e.target;
+    if(target !== modalWrapper){
+        return false;
+    } close();
 
-
-
-
-    })
-
-let formAdd = document.querySelectorAll('.js_admin_form');
-
-formAdd.forEach(form =>{
-    let addProduct = form.querySelector('js_add_product')
-    form.addEventListener("submit",function (ev){
-        ev.preventDefault();
-    });
-    addProduct.addEventListener("click", function (ev){
-        updateAdminProducts(form, 'add',addProduct);
-    })
 })
 
-function updateAdminProducts(form, type='add', addProduct){
-    let id = form.querySelector('.js_id');
-    let img = form.querySelector('.js_img');
 
 
-}
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+    let $prod = $('.product_img');
+    console.log($prod);
+    $prod.change(function (){
+        const $this = $(this);
+        const $prev = $('.js-preview');
+        const file = $this[0]['files'][0]
+
+        $prev.attr('src',URL.createObjectURL(file))
+
+
+    })
+
+
+    $('.admin_form').submit(function (e){
+        e.preventDefault();
+        const formData = new FormData($(this)[0]);
+        console.log(formData.get('product_img'));
+        $.ajax({
+            type: "POST",
+            url: "../admin/controller/productController.php",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(){
+                alert('Товар добавлен');
+            //    window.location.reload();
+
+            }
+        })
+    })
+});
+
+
 
 
 

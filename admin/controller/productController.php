@@ -20,6 +20,9 @@
         header('Location: ../adminPanel.php');
     }
 
+
+
 mysqli_query($connect, "INSERT INTO `goods` (`id`, `product_img`, `product_name`, `product_description`, `product_cost`, `currency` )
                               VALUES (NULL, '$path_img', '$product_name', '$product_description', '$product_price', '$currency')");
+
 
