@@ -1,27 +1,4 @@
-//var checkBox = document.querySelector('.product_check');
-//var adminForm = document.querySelector('.admin_form_wrapper');
-//adminForm.style.display = 'none';
-//
-//checkBox.addEventListener('change', () => {
-//
-//    if(checkBox.checked) {
-//
-//            let prod_dir = '/admin/adminProducts.php';
-//
-//        if (window.location.pathname === prod_dir) {
-//            adminForm.style.display = 'flex';
-//        } else {
-//
-//            window.location.replace('/admin/adminProducts.php');
-//        }
-//
-//
-//
-//    } else {
-//        window.location.replace('/admin/adminPanel.php');
-//        adminForm.style.display = 'none';
-//    }
-//});
+
 
 let modalWindow = document.querySelector('.modal_window');
 const modalWrapper = document.querySelector('.modal_window_wrapper');
@@ -60,10 +37,10 @@ modalWrapper.addEventListener('click', (e) => {
 
 
 $( document ).ready(function() {
-    console.log( "ready!" );
+
 
     let $prod = $('.product_img');
-    console.log($prod);
+
     $prod.change(function (){
         const $this = $(this);
         const $prev = $('.js-preview');
@@ -88,12 +65,16 @@ $( document ).ready(function() {
             processData: false,
             success: function(){
                 alert('Товар добавлен');
-            //    window.location.reload();
 
             }
+
         })
+
+
     })
 });
+
+
 
 
 

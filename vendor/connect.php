@@ -1,8 +1,18 @@
 <?php
 
+    $connect = NULL;
 
-    $connect = new mysqli( 'localhost','root', '', 'auth');
+    function getConnection() {
+        global $connect;
+        if(!$connect){
+            $connect = new mysqli( 'localhost','root', '', 'auth');
+        }
 
-    if(!$connect){
-        die('Error connect to database');
+        if(!$connect){
+            die('Error connect to database');
+        }
+        return $connect;
     }
+
+    getConnection();
+

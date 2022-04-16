@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-include 'C:\OpenServer\domains\auth\vendor\connect.php';
-include 'C:\OpenServer\domains\auth\functions.php';
 
-$result = mysqli_query($connect, "SELECT * FROM `goods`");
+include 'C:\OpenServer\domains\auth\functions.php';
+include 'C:\OpenServer\domains\auth\admin\controller\productController.php';
+
+
 ?>
 
 <!doctype html>
@@ -54,7 +55,6 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                     <form   method="POST" action="controller/productController.php" enctype="multipart/form-data" class="admin_form" >
                         <label >Фото продукта
                             <img src="" alt="" height="100px" class="js-preview">
-                            <img src="" alt="" height="100px" class="js-preview">
                         </label>
                         <input type="file" class="product_img" name="product_img">
                         <label >Название продукта</label>
@@ -67,7 +67,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                         <input  type="text" name="currency" placeholder="Введите валюту">
                         <button type="submit"  class="admin_add">Добавить продукт</button>
                     </form>
-                <p class="msg"><?= $_SESSION['message']    ?></p>
+                    <p class="msg"><?= $_SESSION['message']    ?></p>
                 </div>
             </div>
 
@@ -75,35 +75,41 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
         </div>
 
-    <table id="table_products" class="table_products">
+        <table id="table_products" class="table_products">
 
-        <tr>
-            <th>id</th>
-            <th>Изображение</th>
-            <th>Название</th>
-            <th>Описание</th>
-            <th>Цена</th>
-            <th>Валюта</th>
-            <th>Редактировать</th>
-        </tr>
-        <?php  foreach($result as $admin_products){     ?>
-        <tr>
-            <td class="js_id"><?=  $admin_products['id']  ?></td>
-            <td class="js_img">
-                <img src="../<?=  $admin_products['product_img']  ?>" alt="" style="height: 100px" class="img_in_admin">
-            </td>
-            <td class="js_name"><?=  $admin_products['product_name']  ?></td>
-            <td class="js_description"><?=  $admin_products['product_description']  ?></td>
-            <td class="js_price"><?=  $admin_products['product_cost']  ?></td>
-            <td class="js_currency"><?=  $admin_products['currency']  ?></td>
-            <td><a href="" class="">Редактировать</a></td>
+            <tr>
 
-        </tr>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Цена</th>
+                <th>Валюта</th>
+                <th>Редактировать</th>
+                <th>Удалить товар</th>
+            </tr>
+            <?php if (isset($result_conn)) {
+                foreach($result_conn as $admin_products){     ?>
 
-        <?php     } ?>
-    </table>
 
-</div>
+                        <tr>
+
+                            <td class="js_img">
+                                <img src="../<?=  $admin_products['product_img']  ?>" alt="" style="height: 100px" class="img_in_admin">
+                            </td>
+                            <td class="js_name"><?=  $admin_products['product_name']  ?></td>
+                            <td class="js_description"><?=  $admin_products['product_description']  ?></td>
+                            <td class="js_price"><?=  $admin_products['product_cost']  ?></td>
+                            <td class="js_currency"><?=  $admin_products['currency']  ?></td>
+                            <td><a href="updateProduct.php?id=<?= $admin_products['id']  ?>">Редактировать</a></td>
+                            <td><a href="deleteProduct.php?id=<?= $admin_products['id']  ?>">Удалить</a></td>
+                        </tr>
+
+
+                <?php     }
+            } ?>
+        </table>
+
+    </div>
 </div>
 
 
