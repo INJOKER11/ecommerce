@@ -45,14 +45,23 @@ function getCartProductById($id, $cart){
 function getCartSum($connect, $cart){
 
     $ids_array = getCartProductIds($cart);
-    $ids_string = implode(',', $ids_array);
+    if(count($ids_array) < 1){
+        return 0;
+    }
+    $in  = str_repeat('?,', count($ids_array) - 1) . '?';
 
-    $result = mysqli_query($connect, "SELECT id, product_cost FROM `goods` where id IN ($ids_string)") ;
+
+//$result = mysqli_query($connect, "SELECT id, product_cost FROM `goods` where id IN ($ids_string)") ;
+    $sql = "SELECT id, product_cost FROM goods where id = ($in)";
+    $statement = $connect->prepare($sql);
+    $statement->execute($ids_array  );
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     $sum = 0;
 
     if($result !== false){
-        while($product = mysqli_fetch_assoc($result)) {
+
+        foreach ($result as $product){
             $quantity = getCartProductById($product['id'], $cart)['count'];
             $sum += $product['product_cost'] * $quantity;
         }

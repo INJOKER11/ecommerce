@@ -1,18 +1,15 @@
 <?php
 
-    $connect = NULL;
 
-    function getConnection() {
-        global $connect;
-        if(!$connect){
-            $connect = new mysqli( 'localhost','root', '', 'auth');
-        }
+
+$connect = new PDO('mysql:host=localhost;dbname=auth', 'root', '');
+
 
         if(!$connect){
             die('Error connect to database');
         }
         return $connect;
-    }
 
-    getConnection();
+
+
 

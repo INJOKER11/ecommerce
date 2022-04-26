@@ -7,7 +7,7 @@
     $product_description = $_POST['product_description'];
     $product_price = $_POST['product_price'];
     $currency = $_POST['currency'];
-
+    $id = NULL;
 
     $path_img = 'img_admin/' . time() . $_FILES['product_img']['name'];
 
@@ -20,17 +20,24 @@
 
          }
 
+    if(isset($_POST['product_name'], $_POST['product_description'], $_POST['product_price'], $_POST['currency']))
+    {
+        $sql = 'INSERT INTO goods(id, product_img, product_name, product_description, product_cost, currency )
+                VALUES(?,?,?,?,?,?)';
+
+        $connect->prepare($sql)->execute([$id, $path_img, $product_name,$product_description,$product_price,$currency]);
 
 
-    mysqli_query($connect, "INSERT INTO `goods` (`id`, `product_img`, `product_name`, `product_description`, `product_cost`, `currency` )
-                                  VALUES (NULL, '$path_img', '$product_name', '$product_description', '$product_price', '$currency')");
+    }
 
 
 
 
-    $result_conn = mysqli_query($connect, "SELECT * FROM `goods`");
-    $result = mysqli_fetch_assoc($result_conn);
 
+
+    $sql_all = 'SELECT * FROM goods';
+    $statement = $connect->query($sql_all);
+    $result = $statement->fetchALL(PDO::FETCH_ASSOC);
 
 
 

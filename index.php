@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-include 'C:\OpenServer\domains\auth\vendor\connect.php';
-include 'C:\OpenServer\domains\auth\functions.php';
+require 'C:\OpenServer\domains\auth\vendor\connect.php';
+require 'C:\OpenServer\domains\auth\functions.php';
 
-$result = mysqli_query($connect, "SELECT * FROM `goods`");
-
-
+$sql = 'SELECT * FROM goods';
+$statement = $connect->query($sql);
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -48,8 +48,10 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
             <?php
 
-            while($products = mysqli_fetch_assoc($result))
-            {
+
+
+
+                    foreach($result as $products){
 
 
                 ?>
@@ -103,7 +105,9 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
                 </form>
                 <?php
-            }
+                }
+
+
 
 
             ?>

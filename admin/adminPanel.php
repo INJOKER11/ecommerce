@@ -5,7 +5,6 @@ session_start();
 include 'C:\OpenServer\domains\auth\functions.php';
 include 'C:\OpenServer\domains\auth\admin\controller\productController.php';
 
-
 ?>
 
 <!doctype html>
@@ -87,8 +86,9 @@ include 'C:\OpenServer\domains\auth\admin\controller\productController.php';
                 <th>Редактировать</th>
                 <th>Удалить товар</th>
             </tr>
-            <?php if (isset($result_conn)) {
-                foreach($result_conn as $admin_products){     ?>
+            <?php
+                foreach($result as $admin_products)
+                {   ?>
 
 
                         <tr>
@@ -100,13 +100,15 @@ include 'C:\OpenServer\domains\auth\admin\controller\productController.php';
                             <td class="js_description"><?=  $admin_products['product_description']  ?></td>
                             <td class="js_price"><?=  $admin_products['product_cost']  ?></td>
                             <td class="js_currency"><?=  $admin_products['currency']  ?></td>
-                            <td><a href="updateProduct.php?id=<?= $admin_products['id']  ?>">Редактировать</a></td>
-                            <td><a href="deleteProduct.php?id=<?= $admin_products['id']  ?>">Удалить</a></td>
+                            <td><a href='updateProduct.php?id=<?= $admin_products['id']  ?>'>Редактировать</a></td>
+                            <td><a href='deleteProduct.php?id=<?= $admin_products['id']  ?>'>Удалить</a></td>
+
+
+
+
                         </tr>
 
-
-                <?php     }
-            } ?>
+            <?php } ?>
         </table>
 
     </div>

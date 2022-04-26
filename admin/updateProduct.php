@@ -1,9 +1,16 @@
 <?php
 require_once 'C:\OpenServer\domains\auth\vendor\connect.php';
-
+session_start();
 $product_id = $_GET['id'];
-$product = mysqli_query($connect, "SELECT * FROM `goods` WHERE `id` = '$product_id'");
-$products = mysqli_fetch_assoc($product);
+
+$data = [
+  'product_id' => $product_id
+];
+$sql = "SELECT * FROM goods WHERE id = :product_id";
+$statement = $connect->prepare($sql);
+$statement->execute($data);
+$products = $statement->fetchAll();
+
 ?>
 
 <!doctype html>
@@ -20,7 +27,7 @@ $products = mysqli_fetch_assoc($product);
 
 
 <form   method="POST" action="controller/updateProductController.php" enctype="multipart/form-data" class="admin_form" >
-    <input type="hidden" name="id" value="<?= $products['id'] ?> " >
+    <input type="hidden" name="id" value="<?= $product_id ?>">
     <label >Фото продукта
         <img src="" alt="" height="100px" class="js-preview">
     </label>
@@ -34,6 +41,7 @@ $products = mysqli_fetch_assoc($product);
     <label>Веддите валюту</label>
     <input  type="text" name="product_currency" value="<?= $products['currency'] ?>" placeholder="Введите валюту">
     <button type="submit"  class="admin_add">Редактировать продукт</button>
+    <?=     '<p class="msg">' .  $_SESSION['error_msg']  . '</p>' ?>
 </form>
 
 </body>

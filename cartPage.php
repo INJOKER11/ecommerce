@@ -4,8 +4,9 @@ include 'C:\OpenServer\domains\auth\vendor\connect.php';
 include 'C:\OpenServer\domains\auth\functions.php';
 
 
-
-$result = mysqli_query($connect, "SELECT * FROM `goods`");
+$sql = "SELECT * FROM goods";
+$statement = $connect->query($sql);
+$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 
@@ -53,7 +54,8 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
 
                 <?php
 
-                while($products_in_cart = mysqli_fetch_assoc($result))
+
+                foreach($result as $products_in_cart)
                 {
                 if(!hasIdInCart($products_in_cart['id'], $_SESSION['cart'])){
                     continue;
@@ -64,7 +66,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
                         <input class="js_id" type="hidden" name="product_id" value="<?= $products_in_cart['id'] ?>">
 
                         <div class="img_wrapper">
-                            <img src="   <?= $products_in_cart['product_img']?>" alt="" class="card_img">
+                            <img src="   <?= $products_in_cart['product_img']?>" height="200px" alt="" class="card_img">
                         </div>
 
 
@@ -128,7 +130,7 @@ $result = mysqli_query($connect, "SELECT * FROM `goods`");
         </div>
 
         <p class="msg js_sum">
-            <?=  getCartSum($connect, $_SESSION['cart'])  ?>
+        <?=  getCartSum($connect, $_SESSION['cart'])  ?>
         </p>
 
 

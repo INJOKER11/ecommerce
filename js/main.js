@@ -38,7 +38,7 @@ function updateCart(form, type='add', removeBtn, addBtn){
             var js_object = JSON.parse(json);
             var home_url = '/';
             console.log(js_object);
-
+            console.log(js_object.sum);
             if(window.location.pathname !== home_url){
                 document.querySelector('.js_sum').innerHTML = js_object.sum;
             }
